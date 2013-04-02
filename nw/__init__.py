@@ -19,20 +19,20 @@ is_darwin = nwfiles.is_darwin
 is_linux = nwfiles.is_linux
 
 if is_win:
-  NWTMPDIR = os.environ.get('USERPROFILE')
+  NWTMPDIR = os.environ.get('LOCALAPPDATA')
   if not NWTMPDIR:
-    NWTMPDIR = os.path.expanduser('~\\Application Data')
+    NWTMPDIR = os.path.expanduser('~\\Documents')
 elif is_darwin:
   NWTMPDIR = os.path.expanduser('~/Library/Application Support')
 else:
   NWTMPDIR = os.environ.get('XDG_DATA_HOME')
   if not NWTMPDIR:
-    NWTMPDIR = os.path.expanduser('~/.local/share')    
+    NWTMPDIR = os.path.expanduser('~/.config')    
 
 if is_cygwin:
   NWTMPDIR = os.path.normcase(NWTMPDIR)
   
-NWTMPDIR = os.path.join(NWTMPDIR, '.node-webkit')
+NWTMPDIR = os.path.join(NWTMPDIR, 'node-webkit')
 
 def get_version():
   version = '%s.%s' % (VERSION[0], VERSION[1])
