@@ -5,13 +5,18 @@ import os
 def do_download(url, path):
   file_name = url.split('/')[-1]
   u = urllib2.urlopen(url)
-  f = open(path, 'wb')
   meta = u.info()
   file_size = int(meta.getheaders("Content-Length")[0])
+  if os.path.isfile(path):
+    if file_size == os.path.getsize(path):
+      return
+    
   print "Downloading: %s Bytes: %s" % (file_name, file_size)
-  
+  file_temp = path + '.tmp'
+  f = open(file_temp, 'wb')
   file_size_dl = 0
   block_sz = 8192
+  #download file
   while True:
       buffer = u.read(block_sz)
       if not buffer:
@@ -24,8 +29,7 @@ def do_download(url, path):
       print status,
   
   f.close()
+  shutil.move(file_temp, path)
 
-def DownloadFile(url, path):
-  #if os.path.isfile(path):
-    #os.remove(path)    
+def DownloadFile(url, path): 
   do_download(url, path)
