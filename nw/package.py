@@ -145,6 +145,7 @@ def CheckNwFiles(target):
   elif _is_download_:
     nw_ver = options['latest_version']
   
+  #download file
   if nw_ver != '':
     nw_path = getnwfromnet.GetNwFromNet(nw_ver, target)  
   

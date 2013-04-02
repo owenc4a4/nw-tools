@@ -17,7 +17,9 @@ def GetNwFromNet(ver, target):
     
   nw_name_ =  nwfiles.GetNwTarName(ver, target)
   nw_tar_path_ = os.path.join(path_, nw_name_)
-  nw_path_ = os.path.join(path_, nwfiles.GetNwName(ver, target))
+  nw_path_ = os.path.join(path_, 
+                          'updates', 
+                          nwfiles.GetNwName(ver, target))
   
   url = 'https://s3.amazonaws.com/node-webkit/v%s/%s' % (ver, nw_name_)
   
