@@ -1,4 +1,4 @@
-__all__ = ('NWTMPDIR',
+__all__ = ('NWTMPDIR', 's3_url',
            'VERSION', 'get_version',
            'is_win', 'is_cygwin', 'is_darwin', 'is_linux', 
            'is_py27')
@@ -17,6 +17,9 @@ is_cygwin = nwfiles.is_cygwin
 is_darwin = nwfiles.is_darwin
 
 is_linux = nwfiles.is_linux
+
+
+s3_url = 'https://s3.amazonaws.com/node-webkit/v%s/%s'
 
 if is_win:
   NWTMPDIR = os.environ.get('LOCALAPPDATA')

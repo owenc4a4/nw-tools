@@ -5,7 +5,7 @@ import zipfile
 import tarfile
 
 from nw import nwfiles
-from nw import NWTMPDIR, is_win, is_darwin, is_linux
+from nw import NWTMPDIR, is_win, is_darwin, is_linux, s3_url
 
 from nw.download import DownloadFile
 
@@ -15,13 +15,15 @@ def GetNwFromNet(ver, target):
   if not os.path.isdir(path_):
     os.mkdir(path_)
     
-  nw_name_ =  nwfiles.GetNwTarName(ver, target)
-  nw_tar_path_ = os.path.join(path_, nw_name_)
-  nw_path_ = os.path.join(path_, 
-                          'updates', 
-                          nwfiles.GetNwName(ver, target))
+  nw_name_ =  nwfiles.GetNwTarName(ver, target)  
+  update_path_ = os.path.join(path_, 'updates')
+  nw_path_ = os.path.join(update_path_, nwfiles.GetNwName(ver, target))
+  nw_tar_path_ = os.path.join(update_path_, nw_name_)
   
-  url = 'https://s3.amazonaws.com/node-webkit/v%s/%s' % (ver, nw_name_)
+  if not os.path.isdir(update_path_):
+    os.mkdir(update_path_)
+    
+  url = s3_url % (ver, nw_name_)
   
   #print 'nw:', nw_name_
   #print nw_tar_path_
