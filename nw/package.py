@@ -148,7 +148,9 @@ def CheckNwFiles(target):
   #download file
   if nw_ver != '':
     nw_path = getnwfromnet.GetNwFromNet(nw_ver, target)  
-  
+    if not nw_path:
+      print 'Failed at downloading'
+      return None
   #print options['path_to_nw']
   if not nwfiles.CheckNwFiles(nw_path, target):
     print 'files are not completed.'

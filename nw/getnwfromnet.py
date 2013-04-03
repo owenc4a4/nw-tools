@@ -33,7 +33,8 @@ def GetNwFromNet(ver, target):
     return nw_path_
    
   #download      
-  DownloadFile(url, nw_tar_path_)
+  if not DownloadFile(url, nw_tar_path_):
+    return None
   
   #uncompress
   if os.path.isdir(nw_path_):
@@ -43,12 +44,12 @@ def GetNwFromNet(ver, target):
   
   if target_platfrom == nwfiles.PLATFORMNAMELINUX:
     tar = tarfile.open(nw_tar_path_)
-    tar.extractall(path_)
+    tar.extractall(update_path_)
     tar.close()
 
   if target_platfrom == nwfiles.PLATFORMNAMEWIN:
     zip = zipfile.ZipFile(nw_tar_path_, 'r')
-    zip.extractall(path_)
+    zip.extractall(update_path_)
     zip.close()
     
   if target_platfrom == nwfiles.PLATFORMNAMEMAC:
