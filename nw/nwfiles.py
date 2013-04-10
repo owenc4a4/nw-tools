@@ -15,13 +15,13 @@ PLATFORMNAMEWIN = 'win'
 PLATFORMNAMEMAC = 'osx'
 PLATFORMNAMELINUX = 'linux'
 
-#get platform information
+# get platform information
 if is_linux:
   platform_name = 'linux'
-  
+
 if is_cygwin or is_win:
   platform_name = 'win'
-  
+
 if is_darwin:
   platform_name = 'osx'
 
@@ -66,23 +66,23 @@ def _GetSelfTarName():
     arch = 'x64'
   else:
     arch = 'ia32'
-  
+
   if is_win or is_darwin:
     arch = 'ia32'
-      
+
   binary_name = '-' + platform_name + '-' + arch
   binary_tar = binary_name + '.tar.gz'
 
-  #use zip in mac and windows
+  # use zip in mac and windows
   if is_win or is_darwin:
-    binary_tar = binary_name + '.zip'    
+    binary_tar = binary_name + '.zip'
   return binary_tar
 
 _TARNAME_END[_TARGET_SELF] = _GetSelfTarName()
 
 """ require files by target """
 
-#linux
+# linux
 required_file_linux = (
   'nw',
   'nw.pak',
@@ -92,7 +92,7 @@ required_dev_file_linux = (
   'nwsnapshot',
 )
 
-#win
+# win
 required_file_win = (
   'ffmpegsumo.dll',
   'icudt.dll',
@@ -105,9 +105,9 @@ required_dev_file_win = (
   'nwsnapshot.exe',
 )
 
-#mac
+# mac
 required_file_mac = (
-  'node-webkit.app', 
+  'node-webkit.app',
 )
 required_dev_file_mac = (
  'nwsnapshot',
@@ -147,7 +147,7 @@ def GetPlatformName(target=_TARGET_SELF):
 
 def GetNwTarName(ver, target=_TARGET_SELF):
   tarname = 'node-webkit-v' + ver
-  binary_tar =  tarname + _TARNAME_END[target]
+  binary_tar = tarname + _TARNAME_END[target]
   return binary_tar
 
 def GetNwName(ver, target=_TARGET_SELF):
@@ -162,15 +162,15 @@ def GetPlatformArch(target=_TARGET_SELF):
 def CheckNwFiles(path, target=_TARGET_SELF):
   """
      check whether the path have all files.
-  """  
+  """
   if not os.path.isdir(path):
     return False
-  
+
   file_list = os.listdir(path)
   for file in REQUIRE_FILES_FOR_APP[target]:
     if not file in file_list:
       return False
-    
+
   return True
 
 def GetTargetList(targets, kw):
@@ -183,7 +183,7 @@ def GetTargetList(targets, kw):
     if kw[_TARGET_OPTION[target]]:
       targets.add(target)
       has_one = True
-  
+
   if not has_one:
     targets.add(_TARGET_SELF)
 

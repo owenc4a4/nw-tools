@@ -8,7 +8,7 @@ def EnsureFileCanBeWritten(filename):
   directory = os.path.dirname(filename)
   if directory != '' and not os.path.exists(directory):
     os.makedirs(directory)
-    
+
 def WriteDataFromStream(filename, stream, chunk_size):
   EnsureFileCanBeWritten(filename)
   f = open(filename, 'wb')
@@ -19,16 +19,16 @@ def WriteDataFromStream(filename, stream, chunk_size):
     while True:
       # Indicate that we're still writing.
       status = r"%10d  [%3.2f%%]" % (file_size_dl, file_size_dl * 100. / content_len)
-      status = status + chr(8)*(len(status)+1)
+      status = status + chr(8) * (len(status) + 1)
       sys.stdout.write(status)
       sys.stdout.flush()
-      
+
       data = stream.read(chunk_size)
       data_len = len(data)
       if data_len == 0:
         break
       f.write(data)
-      file_size_dl += data_len     
+      file_size_dl += data_len
   finally:
     sys.stdout.write('\n')
     f.close()
@@ -64,11 +64,11 @@ def HttpDownload(url, target):
       if os.path.isfile(target):
         if content_len == os.path.getsize(target):
           return
-    
+
       try:
         targrt_tmp = target + '.tmp'
-        WriteDataFromStream(targrt_tmp, src, chunk_size=2**20)        
-        if content_len:         
+        WriteDataFromStream(targrt_tmp, src, chunk_size=2 ** 20)
+        if content_len:
           file_size = os.path.getsize(targrt_tmp)
           if content_len != file_size:
             logger('Filesize:%d does not match Content-Length:%d' % (
@@ -76,7 +76,7 @@ def HttpDownload(url, target):
             continue
       finally:
         src.close()
-        
+
       break
     except urllib2.HTTPError, e:
       if e.code == 404:
@@ -89,7 +89,7 @@ def HttpDownload(url, target):
     logger('Download failed on %s, giving up.\n' % url)
     raise
   shutil.move(targrt_tmp, target)
-  
+
 def DownloadFile(url, path):
   try:
     HttpDownload(url, path)

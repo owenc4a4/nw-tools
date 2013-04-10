@@ -1,6 +1,6 @@
 __all__ = ('NWTMPDIR', 's3_url',
            'VERSION', 'get_version',
-           'is_win', 'is_cygwin', 'is_darwin', 'is_linux', 
+           'is_win', 'is_cygwin', 'is_darwin', 'is_linux',
            'is_py27')
 
 import os
@@ -30,11 +30,11 @@ elif is_darwin:
 else:
   NWTMPDIR = os.environ.get('XDG_DATA_HOME')
   if not NWTMPDIR:
-    NWTMPDIR = os.path.expanduser('~/.config')    
+    NWTMPDIR = os.path.expanduser('~/.config')
 
 if is_cygwin:
   NWTMPDIR = os.path.normcase(NWTMPDIR)
-  
+
 NWTMPDIR = os.path.join(NWTMPDIR, 'node-webkit')
 
 def get_version():
