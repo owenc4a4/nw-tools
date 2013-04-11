@@ -93,7 +93,7 @@ def GenerateExecutableApp(nw_path, target):
                              'node-webkit.app',
                              'Contents',
                              'Resources',
-                             app_tar_name))
+                             'app.nw'))
   else:
     shutil.copy(os.path.join(package_path, app_tar_name),
                 os.path.join(exec_app_path, app_tar_name))
