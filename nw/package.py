@@ -125,7 +125,6 @@ def GenerateExecutableApp(nw_path, target):
 
   os.chdir(tmp_cwd)
 
-
 def CheckNwFiles(target):
   """
     --nw-path and --nw-ver, most one can be set.
@@ -142,8 +141,6 @@ def CheckNwFiles(target):
   nw_ver = ''
   if options.has_key('nw_version'):
     nw_ver = options['nw_version']
-  elif _is_download_:
-    nw_ver = options['latest_version']
 
   # download file
   if nw_ver != '':
@@ -166,7 +163,9 @@ def PackageApp(targets):
   MakeZip()
 
   """ get node-webkit version """
-  options['latest_version'] = getlatestversion.latestVersion()
+  if not options.has_key('path_to_nw') and not options.has_key('nw_version'):
+    print 'Get newest stable version'
+    options['nw_version'] = getlatestversion.latestVersion()
 
   for t in targets:
     nw_path = CheckNwFiles(t)
