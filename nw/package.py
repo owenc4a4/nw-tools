@@ -128,7 +128,7 @@ def GenerateExecutableApp(nw_path, target):
 def CheckNwFiles(target):
   """
     --nw-path and --nw-ver, most one can be set.
-    if --nw-path is set, use this nw'binrary and don't download from web.
+    if --nw-path is set, use this nw'binary and don't download from web.
     if --nw-ver, download this version's node-webkit.
     if both not, download the latest node-webkit.
   """
@@ -144,6 +144,7 @@ def CheckNwFiles(target):
 
   # download file
   if nw_ver != '':
+    print 'Download node-webkit binary'
     nw_path = getnwfromnet.GetNwFromNet(nw_ver, target)
     if not nw_path:
       print 'Failed at downloading'
