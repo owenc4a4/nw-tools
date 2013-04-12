@@ -176,13 +176,15 @@ def PackageApp(targets):
 
 def __add_argument(parser):
   parser.add_argument("app_path",
-                      help="app path")
+                      help="path to the application that been packaged")
 
-  group = parser.add_mutually_exclusive_group()
+  g = parser.add_argument_group('exclusive options',
+                                'As for following options, at most one can be set')
+  group = g.add_mutually_exclusive_group()
   group.add_argument("--nw-path",
-                      help="path to nw files")
+                      help="path to nw binary files that to be packaged with")
   group.add_argument("--nw-ver",
-                      help="the download version of node-webkit")
+                      help="the stable version of node-webkit to be download")
 
 
 

@@ -189,7 +189,11 @@ def GetTargetList(targets, kw):
 
 def __add_argument(parser):
   g = parser.add_argument_group('target platform', 'target platform to be packaged')
-  g.add_argument("--all", help='all platform', action='store_true')
+  g.add_argument("--all",
+                 help='all platform',
+                 action='store_true')
 
   for target in _TARGET_OPTION:
-    g.add_argument("--%s" % (_TARGET_OPTION[target]), action='store_const', const=target)
+    g.add_argument("--%s" % (_TARGET_OPTION[target]),
+                   action='store_const',
+                   const=target)
