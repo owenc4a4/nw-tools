@@ -88,6 +88,10 @@ def GenerateExecutableApp(nw_path, target):
 
 
   if nwfiles.GetPlatformName(target) == nwfiles.PLATFORMNAMEMAC:
+    subprocess.call('chmod -R 755 %s',
+                    os.path.join(exec_app_path, 'node-webkit.app'),
+                    shell=True)
+
     shutil.copy(os.path.join(package_path, app_tar_name),
                 os.path.join(exec_app_path,
                              'node-webkit.app',
