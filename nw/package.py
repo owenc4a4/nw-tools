@@ -145,7 +145,7 @@ def CheckNwFiles(target):
   # download file
   if nw_ver != '':
     print 'Download node-webkit binary'
-    nw_path = getnwfromnet.GetNwFromNet(nw_ver, target)
+    nw_path = getnwfromnet.GetNwFromNet(nw_ver, target, options['keep'])
     if not nw_path:
       print 'Failed at downloading'
       return None
@@ -186,6 +186,9 @@ def __add_argument(parser):
                       help="path to nw binary files that to be packaged with")
   group.add_argument("--nw-ver",
                       help="the stable version of node-webkit to be download")
+  parser.add_argument("--keep",
+                      action='store_true',
+                      help="keep download files")
 
 
 
@@ -202,6 +205,7 @@ def main(app_path, nw_path, nw_ver, **kw):
     'path_for_package': "",
     'path_for_exec_app': '',
     'app_name': '',
+    'keep': kw['keep'],
   }
   options['path_to_app_src'] = os.path.abspath(app_path)
   options['path_for_package'] = os.path.join(options['path_to_app_src'], _DIR_FOR_APP)
